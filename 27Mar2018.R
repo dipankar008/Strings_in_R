@@ -1,3 +1,5 @@
+## Manupulation and Visualization of text data using stringr package
+
 library(stringr)
 
 print("\"")
@@ -56,18 +58,58 @@ cat(str_sub(email[1], start = 843))
 
 #9
 
-
+str_split(header, pattern = "\n")
 
 
 
 #10
 
 breaks <- str_locate(email, "\n\n")
-header <- sapply(email, str_sub, end = breaks[,1] )
-#header <- str_sub(emails, end = breaks[,1])
-body <- sapply(email, str_sub, start =breaks[,2])
-#body <- str_sub(emails, start = breaks[,2])
-
-
+header1 <- sapply(email, str_sub, end = breaks[,1] )
+header <- str_sub(email, end = breaks[,1])
+body1 <- sapply(email, str_sub, start =breaks[,2])
+body <- str_sub(email, start = breaks[,2])
 
 cat(body[1])
+
+#Regular Expressions in R and Messy Data-Lab
+
+#1
+fruit <- c("apple", "banana", "pear", "pinapple", "axe")
+
+#2
+str_detect(fruit, "a")
+
+str_detect(fruit, "^a")
+
+str_detect(fruit, "a$")
+
+str_detect(fruit, "[aeiou]")
+
+str_detect(fruit, "[a-d]")
+
+str_detect(fruit,"[0-9]")
+
+pass_name <- as.character("Braund, Mr. Owen Harris")
+gsub(pattern ="^.*, (.*?)\\..*$",
+     replacement = "\\1", 
+     pass_name)
+
+#3
+#### . could be any character or number 
+str_detect(fruit, pattern = "^a[a-z]*e$")
+
+#4
+
+phone <- c("213 740 4826", "213-740-4826", "2137404826", "213 7404826", "213 740-4826", "(213) 7404826")
+
+str_detect(phone, "[(]?[0-9]{3}[)]?[- ]?[0-9]{3}[- ]?[0-9]{4}")
+
+#5 
+
+phone_nos <- str_extract_all(body1,"[(]?[0-9]{3}[)]?[- ][0-9]{3}[- ][0-9]{4}")
+
+phone_nos[[84]][1]
+
+
+
